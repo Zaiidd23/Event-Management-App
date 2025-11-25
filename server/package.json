@@ -1,0 +1,27 @@
+{
+  "name": "event-manager-server",
+  "version": "1.0.0",
+  "description": "Backend server for event manager email notifications",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "pm2:start": "pm2 start index.js --name email-server",
+    "pm2:stop": "pm2 stop email-server",
+    "pm2:restart": "pm2 restart email-server",
+    "pm2:delete": "pm2 delete email-server",
+    "pm2:logs": "pm2 logs email-server"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "nodemailer": "^6.9.7",
+    "dotenv": "^16.3.1",
+    "openai": "^4.20.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
+
+

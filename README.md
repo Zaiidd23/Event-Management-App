@@ -1,6 +1,62 @@
-# Getting Started with Create React App
+# Acadia Hub - Event Management System
+
+A campus event management platform with intelligent chatbot.
+
+## Features
+
+- 🎉 Event Management (Create, Edit, Delete, Register)
+- 👥 User Roles (Students & Clubs)
+- 💬 Intelligent Chatbot with event suggestions
+- 📧 Email Notifications (via Nodemailer & Gmail SMTP)
+- 🌓 Light/Dark Mode
+- 📱 Responsive Design
+- ⚡ Real-time Updates
+
+## Getting Started
+
+### Frontend Setup
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+1. Install dependencies:
+```bash
+npm install
+```
+
+2. Start the React app:
+```bash
+npm start
+```
+
+### Backend Email Server Setup
+
+The email notification system uses Nodemailer with Gmail SMTP.
+
+1. Navigate to the server directory:
+```bash
+cd server
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Set up Gmail SMTP:
+   - Enable 2-Step Verification on your Google Account
+   - Generate an App Password from [Google App Passwords](https://myaccount.google.com/apppasswords)
+   - Create a `.env` file in the `server` folder (see `server/ENV_SETUP.txt` for details)
+
+4. Start the email server:
+```bash
+npm start
+# or for development with auto-reload:
+npm run dev
+```
+
+The email server runs on `http://localhost:5000` by default.
+
+For detailed email server setup instructions, see `server/README.md`.
 
 ## Available Scripts
 
