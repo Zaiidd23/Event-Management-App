@@ -1,15 +1,15 @@
 import { signOut } from 'firebase/auth';
 import {
-  addDoc,
-  arrayRemove,
-  arrayUnion,
-  collection,
-  deleteDoc,
-  doc,
-  getDoc,
-  onSnapshot,
-  serverTimestamp,
-  updateDoc
+    addDoc,
+    arrayRemove,
+    arrayUnion,
+    collection,
+    deleteDoc,
+    doc,
+    getDoc,
+    onSnapshot,
+    serverTimestamp,
+    updateDoc
 } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import Chatbot from './Chatbot';
@@ -44,7 +44,6 @@ const Dashboard = () => {
     console.log('🔌 Testing Firebase connection...');
     console.log('📦 Database:', db);
     console.log('👤 Auth:', auth);
-    console.log('👤 Current user:', user);
     
     // Test if we can access the collection
     try {
@@ -204,26 +203,26 @@ const Dashboard = () => {
     }
   }, [profileDropdownOpen]);
 
-  // Function to get user name from user ID
-  const getUserName = async (userId) => {
-    if (userNames[userId]) {
-      return userNames[userId];
-    }
-    
-    try {
-      const userDocRef = doc(db, 'users', userId);
-      const userDoc = await getDoc(userDocRef);
-      if (userDoc.exists()) {
-        const userName = userDoc.data().name || userDoc.data().email;
-        setUserNames(prev => ({ ...prev, [userId]: userName }));
-        return userName;
-      }
-      return userId; // fallback to user ID if name not found
-    } catch (error) {
-      console.error('Error fetching user name:', error);
-      return userId; // fallback to user ID
-    }
-  };
+  // Function to get user name from user ID (currently unused, kept for future use)
+  // const getUserName = async (userId) => {
+  //   if (userNames[userId]) {
+  //     return userNames[userId];
+  //   }
+  //   
+  //   try {
+  //     const userDocRef = doc(db, 'users', userId);
+  //     const userDoc = await getDoc(userDocRef);
+  //     if (userDoc.exists()) {
+  //       const userName = userDoc.data().name || userDoc.data().email;
+  //       setUserNames(prev => ({ ...prev, [userId]: userName }));
+  //       return userName;
+  //     }
+  //     return userId; // fallback to user ID if name not found
+  //   } catch (error) {
+  //     console.error('Error fetching user name:', error);
+  //     return userId; // fallback to user ID
+  //   }
+  // };
 
   const showNotification = (message, type = 'success') => {
     setNotification({ message, type });
@@ -1438,7 +1437,6 @@ const Dashboard = () => {
                 {(() => {
                   const today = new Date();
                   const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
-                  const lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
                   const startDate = new Date(firstDay);
                   startDate.setDate(startDate.getDate() - startDate.getDay());
                   
