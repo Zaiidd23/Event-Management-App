@@ -1,15 +1,15 @@
 import { signOut } from 'firebase/auth';
 import {
-    addDoc,
-    arrayRemove,
-    arrayUnion,
-    collection,
-    deleteDoc,
-    doc,
-    getDoc,
-    onSnapshot,
-    serverTimestamp,
-    updateDoc
+  addDoc,
+  arrayRemove,
+  arrayUnion,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  onSnapshot,
+  serverTimestamp,
+  updateDoc
 } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import Chatbot from './Chatbot';
@@ -281,6 +281,7 @@ const Dashboard = () => {
           const eventData = eventDoc.data();
           
           if (eventData && user.email) {
+            console.log('📧 Email conditions met - eventData and user.email exist');
             const eventDate = eventData.startTime 
               ? new Date(eventData.startTime).toLocaleString('en-US', {
                   weekday: 'long',
@@ -293,6 +294,10 @@ const Dashboard = () => {
               : null;
             
             const apiUrl = process.env.REACT_APP_EMAIL_API_URL || 'http://localhost:5000';
+            console.log('📧 Attempting to send email...');
+            console.log('📧 API URL:', apiUrl);
+            console.log('📧 User email:', user.email);
+            
             const response = await fetch(`${apiUrl}/api/send-email`, {
               method: 'POST',
               headers: {
@@ -308,6 +313,8 @@ const Dashboard = () => {
               })
             });
             
+            console.log('📧 Email API response status:', response.status);
+            
             if (response.ok) {
               const result = await response.json();
               if (result.success) {
@@ -316,13 +323,16 @@ const Dashboard = () => {
                 console.warn('⚠️ Email sending failed:', result.error);
               }
             } else {
-              console.warn('⚠️ Email server responded with error:', response.status);
+              const errorText = await response.text();
+              console.warn('⚠️ Email server responded with error:', response.status, errorText);
             }
           }
         } catch (emailError) {
           // Don't show error to user if email fails, just log it
           // This ensures registration still works even if email server is down
-          console.error('Email sending error (non-blocking):', emailError);
+          console.error('❌ Email sending error (non-blocking):', emailError);
+          console.error('❌ Error details:', emailError.message);
+          console.error('❌ Error stack:', emailError.stack);
         }
       }
     } catch (error) {
